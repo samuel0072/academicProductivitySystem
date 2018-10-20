@@ -106,6 +106,16 @@ public class Laboratory {
 
     }
 
+    public void showMembers(){
+        System.out.println("Membros do lab:");
+
+        ColaboratorIterator e = (ColaboratorIterator) colaborators.createIterator ();
+        while(e.hasNext ()){
+            Colaborator a = (Colaborator) e.next ();
+            System.out.println("Nome: "+ a.getName () +", email: "+ a.getEmail ());
+        }
+    }
+
     /*Item 4*/
     public void report(){
 

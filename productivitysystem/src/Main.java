@@ -1,3 +1,4 @@
+import productivitysystem.colaborator.Colaborator;
 import productivitysystem.colaborator.researcher.Researcher;
 import productivitysystem.colaborator.researcher.ResearcherWithProject;
 import productivitysystem.colaborator.student.Student;
@@ -5,6 +6,7 @@ import productivitysystem.colaborator.student.StudentWithProject;
 import productivitysystem.colaborator.teacher.Teacher;
 import productivitysystem.colaborator.teacher.TeacherWithProject;
 import productivitysystem.laboratory.Laboratory;
+import productivitysystem.project.Project;
 import productivitysystem.util.iterator.colections.ColaboratorCollection;
 import productivitysystem.util.iterator.colections.PublicationCollection;
 
@@ -16,7 +18,6 @@ public class Main {
 
     public static void main(){
         System.out.println("Bem vindo!");
-
     }
 
     public static void menu(){
@@ -77,6 +78,7 @@ public class Main {
     }
 
     public  static void menuAddProj(){
+
          String title;
          String startdate;
          String endDate;
@@ -84,13 +86,48 @@ public class Main {
          double value;
          String objective;
          String description;
-         ColaboratorCollection members;
-         PublicationCollection publicacoes;
          String status;
+         Colaborator manager;
+         String email;
 
          if(reader.hasNext ()) {
              reader.nextLine ();
          }
+         System.out.println("informe:");
+         System.out.println("titulo do projeto:");
+         title = reader.nextLine ();
+
+         System.out.println("data de inicio do projeto:");
+         startdate = reader.nextLine ();
+
+         System.out.println("data de termino do projeto:");
+         endDate = reader.nextLine ();
+
+         System.out.println("a agencia financiadora:");
+         financierAgency = reader.nextLine();
+
+         System.out.println("o valor do financiamento:");
+         value = readEntrance ( 0.0, 999999.9999 );
+
+         System.out.println("o objetivo(Em apenas uma linha)");
+         objective = reader.nextLine ();
+
+         System.out.println("A descricao(Em apenas uma linha):");
+         description = reader.nextLine ();
+
+         System.out.println("Digite o email do gerente do projeto:");
+         laboratory.showMembers ();
+         email = reader.nextLine ();
+         Colaborator e = laboratory.getColaborator ( email );
+
+         while(e != null) {
+             System.out.println("Digite o email de novo");
+             email = reader.nextLine ();
+             e = laboratory.getColaborator ( email );
+         }
+         laboratory.addProject ( new Project ( title, startdate, endDate, financierAgency, value, objective,
+                 description, "Em andamento" , e) );
+
     }
 
     public static int readEntrance(int lowBound, int upBound){
@@ -101,6 +138,22 @@ public class Main {
         while(d <= lowBound || d >= upBound) {
             try {
                 d = reader.nextInt ();
+            }
+            catch(Exception e){
+                d = lowBound;
+            }
+        }
+        return d;
+    }
+
+    public static double readEntrance(double lowBound, double upBound){
+        if(reader.hasNext ()) {
+            reader.nextLine ();
+        }
+        double d = lowBound;
+        while(d <= lowBound || d >= upBound) {
+            try {
+                d = reader.nextDouble ();
             }
             catch(Exception e){
                 d = lowBound;
