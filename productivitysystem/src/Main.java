@@ -20,6 +20,7 @@ public class Main {
 
     public static void main(){
         System.out.println("Bem vindo!");
+        menu();
     }
 
     public static void menu(){
@@ -51,7 +52,7 @@ public class Main {
                     menuAddMentoring ();
                     break;
                 case 5:
-                    //todo
+                    menuEditProj ();
                     break;
                 case 6:
                     menuModPub ();
@@ -60,7 +61,7 @@ public class Main {
                 case 8:
                     generateProjRep ();
             }
-
+        clear ();
         }
 
     }
@@ -277,6 +278,48 @@ public class Main {
         }
     }
 
+    public static void menuEditProj(){
+        String title;
+        Project target = null;
+        int d;
+
+        if(reader.hasNext ()) {
+            reader.nextLine ();
+        }
+
+        while(target == null) {
+            System.out.println("Informe o titulo do projeto:");
+            title = reader.nextLine ();
+            target = laboratory.getProject ( title );
+        }
+        System.out.println("O que deseja fazer?");
+        System.out.println("1 - Alocar um membro ao projeto");
+        System.out.println("2 - Mudar estado do projeto");
+        d = readEntrance ( 0, 3 );
+
+        if(d == 1){
+            System.out.println("Escolha o email do colaborador:");
+            laboratory.showMembers ();
+            Colaborator e = null;
+            String email;
+            while(e == null) {
+                System.out.println("Digite o email:");
+                email = reader.nextLine ();
+                e = laboratory.getColaborator ( email );
+                target.addMember ( e );
+            }
+        }
+        else{
+            System.out.println("Qual estado deseja adotar?");
+            System.out.println("1 - Em andamento");
+            System.out.println("2 - Concluido");
+            d = readEntrance ( 0, 3 );
+            String[] status = {"Em andamento", "Concluido"};
+            System.out.println(target.setStatus ( status[d-1] )? "Status mudado com sucsso!":" Ops...");
+        }
+
+    }
+
     public static int readEntrance(int lowBound, int upBound){
         if(reader.hasNext ()) {
             reader.nextLine ();
@@ -307,5 +350,11 @@ public class Main {
             }
         }
         return d;
+    }
+
+    public static void clear(){
+        for(int i = 0; i < 100; i++){
+            System.out.println();
+        }
     }
 }
