@@ -15,8 +15,8 @@ public class Publication{
     private String title;
     Project project;
 
-    public Publication(ColaboratorCollection authors, String conference, int year, String title){
-        this.authors = authors;
+    public Publication(String conference, int year, String title){
+        this.authors = new ColaboratorCollection ();
         this.title = title;
         this.conference = conference;
         this.year = year;

@@ -150,6 +150,10 @@ public class Project {
 
     }
 
+    public void addpublication(Publication e){
+        publicacoes.addPublications ( e );
+    }
+
     public Colaborator getManager(){
         return this.manager;
     }
