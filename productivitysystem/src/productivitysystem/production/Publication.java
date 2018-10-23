@@ -24,10 +24,10 @@ public class Publication{
 
     public void showAuthors(){
         ColaboratorIterator e = (ColaboratorIterator) authors.createIterator ();
-        System.out.println("Colaboradores desta publicação:");
+        System.out.println("\n\tColaboradores desta publicação:");
         while( e.hasNext ()){
             Colaborator cc = (Colaborator) e.next ();
-            System.out.println ( "Colaborador: " +cc.getName ()+" Email:"+cc.getEmail ());
+            System.out.println ( "\tColaborador: " +cc.getName ()+" Email:"+cc.getEmail ());
         }
 
     }
@@ -48,10 +48,17 @@ public class Publication{
         this.authors.addColaborator ( e );
     }
 
+    public Project getProject(){
+        return this.project;
+    }
     /*Item 2 implementado aqui*/
-    public void addProject(Project e){
-        if(this.project == null && e.getStatus().equals("Em adamento")){
+    public boolean addProject(Project e){
+        boolean suceed = false;
+        if(this.project == null && e.getStatus().equals("Em andamento")){
             project = e;
+            e.addpublication ( this );
+            suceed =  true;
         }
+        return suceed;
     }
 }

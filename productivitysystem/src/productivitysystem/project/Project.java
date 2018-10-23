@@ -2,6 +2,7 @@ package productivitysystem.project;
 
 import productivitysystem.colaborator.Colaborator;
 import productivitysystem.colaborator.student.Student;
+import productivitysystem.colaborator.student.StudentWithProject;
 import productivitysystem.colaborator.teacher.Teacher;
 import productivitysystem.production.Publication;
 import productivitysystem.util.iterator.colections.ColaboratorCollection;
@@ -93,10 +94,10 @@ public class Project {
 
     public void showMembers(){
         ColaboratorIterator e = (ColaboratorIterator) members.createIterator ();
-        System.out.println("Colaboradores deste projeto:");
+        System.out.println("\n\tColaboradores deste projeto:\n");
         while( e.hasNext ()){
             Colaborator cc = (Colaborator) e.next ();
-            System.out.println ( "Colaborador: " +cc.getName ()+" Email: "+cc.getEmail ());
+            System.out.println ( "\tColaborador: " +cc.getName ()+" Email: "+cc.getEmail ());
         }
     }
 
@@ -144,14 +145,18 @@ public class Project {
                 this.attach ( (Student) e );
 
             }
-            else if(!(e instanceof Student))
+            else if((!(e instanceof Student)) || (!((Student) e).getType ().equals ( "Graduacao" )))
                 this.members.addColaborator ( e );
         }
 
     }
 
     public void addpublication(Publication e){
-        publicacoes.addPublications ( e );
+        if(e.getProject () == null && this.status.equals ( "Em andamento" ) ){
+            publicacoes.addPublications ( e );
+            e.addProject ( this );
+        }
+
     }
 
     public Colaborator getManager(){
@@ -161,21 +166,21 @@ public class Project {
     /*Item 3-b*/
     public void projectQuery(){
 
-        System.out.println("Dados do projeto:");
-        System.out.println("Titulo: "+ this.getTitle ());
-        System.out.println("Data de inicio: "+ this.getStartdate ());
-        System.out.println("Data de termino: " + this.getEndDate ());
-        System.out.println("Agencia de financiamento: "+this.getFinancierAgency ());
-        System.out.println ( "Valor do financiamento: "+ this.getValue () );
-        System.out.println("Descricao: "+ this.getDescription ());
+        System.out.println("Dados do projeto:\n");
+        System.out.println("\tTitulo: "+ this.getTitle ());
+        System.out.println("\n\tData de inicio: "+ this.getStartdate ());
+        System.out.println("\n\tData de termino: " + this.getEndDate ());
+        System.out.println("\n\tAgencia de financiamento: "+this.getFinancierAgency ());
+        System.out.println ( "\n\tValor do financiamento: "+ this.getValue () );
+        System.out.println("\n\tDescricao: "+ this.getDescription ());
         this.showMembers ();
-        System.out.println("Gerente do projeto : "+ manager.getName ()+", Email:"+manager.getEmail ());
-        System.out.println("Status do projeto"+ this.getStatus ());
-        System.out.println("Producoes academicas:");
+        System.out.println("\n\tGerente do projeto : "+ manager.getName ()+", Email:"+manager.getEmail ());
+        System.out.println("\n\tStatus do projeto: "+ this.getStatus ());
+        System.out.println("\n\tProducoes academicas:");
         ArrayList<Publication> e = publicacoes.sortByYear ();
 
         for(Publication a: e){
-            System.out.println("Publicacao: "+a.getTitle ()+", ano: "+a.getYear ());
+            System.out.println("\n\tPublicacao: "+a.getTitle ()+", ano: "+a.getYear ());
         }
 
     }

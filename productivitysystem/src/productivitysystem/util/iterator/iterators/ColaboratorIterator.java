@@ -24,7 +24,7 @@ public class ColaboratorIterator implements Iterator{
     @Override
     public Object next() {
         Colaborator e = this.colaborators.get ( index );
-        index =+1;
+        this.index = this.index+1;
         return e;
     }
 

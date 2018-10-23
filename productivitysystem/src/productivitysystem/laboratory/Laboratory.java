@@ -56,10 +56,14 @@ public class Laboratory {
     public Colaborator getColaborator(String email){
         ColaboratorIterator e = (ColaboratorIterator) colaborators.createIterator ();
         Colaborator target = null;
+
         while(e.hasNext ()){
             Colaborator a = (Colaborator) e.next ();
+            /*System.out.println(e.index ());
+            System.out.println(a.getEmail ());*/
             if(a.getEmail ().equals(email)){
                 target = a;
+
             }
         }
         return target;

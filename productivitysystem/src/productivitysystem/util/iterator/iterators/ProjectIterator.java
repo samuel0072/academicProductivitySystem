@@ -23,7 +23,7 @@ public class ProjectIterator implements Iterator{
     @Override
     public Object next() {
         Project e = this.projects.get ( index );
-        index =+1;
+        index = index +1;
         return e;
     }
 

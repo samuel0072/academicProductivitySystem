@@ -23,7 +23,7 @@ public class MentoringIterator implements Iterator{
     @Override
     public Object next() {
         Mentoring e = this.mentorings.get ( index );
-        index =+1;
+        index = index  + 1;
         return e;
     }
 

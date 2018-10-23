@@ -18,14 +18,14 @@ public class Main {
     public static Scanner reader = new Scanner ( System.in );
     public static Laboratory laboratory = Laboratory.Instance ();
 
-    public static void main(){
+    public static void main(String[] args){
         System.out.println("Bem vindo!");
         menu();
     }
 
     public static void menu(){
         int d = 0;
-        while(d == 0) {
+        while(true) {
             System.out.println ( "O que deseja fazer?" );
 
             System.out.println ( "1 - Adicionar um novo colaborador" );
@@ -77,10 +77,7 @@ public class Main {
         System.out.println("3 - Pesquisador");
 
         d = readEntrance ( 0, 4 );
-
-        if(reader.hasNext ()) {
-            reader.nextLine ();
-        }
+        
 
         System.out.println("Qual seu nome?");
         name = reader.nextLine ();
@@ -99,12 +96,15 @@ public class Main {
                 System.out.println("3 - Doutorado");
                 d = readEntrance ( 0, 4 );
                 laboratory.addColaborator (  new StudentWithProject ( new Student(name, types[d-1] , email), role ) );
+                break;
 
             case 2:
                 laboratory.addColaborator ( new TeacherWithProject ( new Teacher ( name, email ), role ) );
+                break;
 
             case 3:
                 laboratory.addColaborator ( new ResearcherWithProject ( new Researcher ( name, email ), role ) );
+                break;
         }
     }
 
@@ -321,9 +321,6 @@ public class Main {
     }
 
     public static int readEntrance(int lowBound, int upBound){
-        if(reader.hasNext ()) {
-            reader.nextLine ();
-        }
         int d = lowBound;
         while(d <= lowBound || d >= upBound) {
             try {
@@ -337,9 +334,6 @@ public class Main {
     }
 
     public static double readEntrance(double lowBound, double upBound){
-        if(reader.hasNext ()) {
-            reader.nextLine ();
-        }
         double d = lowBound;
         while(d <= lowBound || d >= upBound) {
             try {

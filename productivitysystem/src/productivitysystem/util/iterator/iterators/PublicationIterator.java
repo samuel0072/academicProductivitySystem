@@ -24,7 +24,7 @@ public class PublicationIterator implements Iterator{
     @Override
     public Object next() {
         Publication e = this.publications.get ( index );
-        index =+1;
+        index = index +1;
         return e;
     }
 
