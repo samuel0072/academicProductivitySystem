@@ -34,7 +34,7 @@ public class Main {
             System.out.println ( "\t8 - Gerar um relatorio sobre algum projeto em especifico" );
             System.out.println ( "\t9 - Gerar um relatorio sobre algum membro do lab");
 
-            d = readEntrance ( 0, 9 );
+            d = readEntrance ( 0, 10);
             switch (d){
                 case 1:
                     menuAddCol ();
@@ -129,7 +129,7 @@ public class Main {
          startdate = readEntrance ( 1989, 2019 );
 
          System.out.println("data de termino do projeto:");
-         endDate = readEntrance ( 1989, 2019 );
+         endDate = readEntrance ( startdate-1, 2999 );
 
          System.out.println("a agencia financiadora:");
          financierAgency = reader.nextLine();
