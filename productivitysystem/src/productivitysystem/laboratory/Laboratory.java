@@ -224,13 +224,16 @@ public class Laboratory {
         System.out.println( (e instanceof Student) ?"\n\tEstudante de "+ ((Student) e).getType () : "" );
 
         System.out.println("\n\tProjetos:");
-        for (Project p1: memberProjs) {
+        Project p1;
+        for (int i = memberPubs.size ()-1; i >= 0; i--) {
+            p1 = memberProjs.get(i);
             if(!p1.getStatus ().equals ( "Em andamento" )) {
                 System.out.println("\tProjeto: " + p1.getTitle () +", ano: "+p1.getStartdate ());
             }
         }
         System.out.println("\t-Projetos em andamento:");
-        for (Project p1: memberProjs) {
+        for (int i = memberPubs.size ()-1; i >= 0; i--) {
+            p1= memberProjs.get(i);
             if(p1.getStatus ().equals ( "Em andamento" )) {
                 System.out.println("\tProjeto: " + p1.getTitle () +", ano: "+p1.getStartdate ());
             }
@@ -248,8 +251,10 @@ public class Laboratory {
         }
 
         System.out.println("\n\tPublicacoes:");
-        for (Publication p1: memberPubs) {
-            System.out.println("\tPublicacao: " + p1.getTitle () +", ano: "+p1.getYear ());
+        Publication p2;
+        for (int i = memberPubs.size ()-1; i >= 0; i--) {
+            p2 = memberPubs.get ( i );
+            System.out.println("\tPublicacao: " + p2.getTitle () +", ano: "+p2.getYear ());
         }
 
     }
