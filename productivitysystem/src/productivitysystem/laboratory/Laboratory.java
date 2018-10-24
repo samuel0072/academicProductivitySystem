@@ -1,6 +1,8 @@
 package productivitysystem.laboratory;
 
 import productivitysystem.colaborator.Colaborator;
+import productivitysystem.colaborator.student.Student;
+import productivitysystem.colaborator.teacher.Teacher;
 import productivitysystem.production.Mentoring;
 import productivitysystem.production.Publication;
 import productivitysystem.project.Project;
@@ -13,6 +15,8 @@ import productivitysystem.util.iterator.iterators.MentoringIterator;
 import productivitysystem.util.iterator.iterators.ProjectIterator;
 import productivitysystem.util.iterator.iterators.PublicationIterator;
 
+import java.util.ArrayList;
+
 public class Laboratory {
 
     private static Laboratory _instance = null;
@@ -22,7 +26,7 @@ public class Laboratory {
     private MentoringCollection mentorings;
     private PublicationCollection publications;
 
-    protected Laboratory(){
+    private Laboratory(){
         this.colaborators = new ColaboratorCollection ();
         this.mentorings = new MentoringCollection ();
         this.projects = new ProjectCollection ();
@@ -59,11 +63,9 @@ public class Laboratory {
 
         while(e.hasNext ()){
             Colaborator a = (Colaborator) e.next ();
-            /*System.out.println(e.index ());
-            System.out.println(a.getEmail ());*/
             if(a.getEmail ().equals(email)){
                 target = a;
-
+                break;
             }
         }
         return target;
@@ -83,17 +85,20 @@ public class Laboratory {
 
     }
 
-    public Mentoring getMentoring(String teacherEmail, String studentEmail){
+    public MentoringCollection getMentorings(String teacherEmail){
+        MentoringCollection result = new MentoringCollection ();
+
         MentoringIterator e = (MentoringIterator) mentorings.createIterator ();
+
         Mentoring target = null;
+
         while(e.hasNext ()){
             Mentoring a = (Mentoring) e.next ();
-            if(a.getTeacher ().getEmail ().equals ( teacherEmail )
-                    && a.getStudent ().getEmail ().equals ( studentEmail )){
-                target = a;
+            if(a.getTeacher ().getEmail ().equals ( teacherEmail )){
+                result.addMentoring ( a );
             }
         }
-        return target;
+        return result;
 
     }
 
@@ -104,6 +109,7 @@ public class Laboratory {
             Publication a = (Publication) e.next ();
             if(a.getTitle () == title){
                 target = a;
+                break;
             }
         }
         return target;
@@ -141,19 +147,90 @@ public class Laboratory {
 
         }
 
-        System.out.println("Relatorio de producoes academicas do laboratorio");
+        System.out.println("\nRelatorio de producoes academicas do laboratorio");
 
-        System.out.println("Numero de colaboradores: " + colaborators.getNumItens ());
+        System.out.println("\tNumero de colaboradores: " + colaborators.getNumItens ());
 
-        System.out.println("Numero de projetos em elaboracao: " + elaboring);
-        System.out.println("Numero de projetos em andamento: " + progress );
-        System.out.println("Numero de projetos finalizados: "+ done);
-        System.out.println("Numero total de projetos:" + projects.getNumItens ());
+        System.out.println("\tNumero de projetos em elaboracao: " + elaboring);
+        System.out.println("\tNumero de projetos em andamento: " + progress );
+        System.out.println("\tNumero de projetos finalizados: "+ done);
+        System.out.println("\tNumero total de projetos:" + projects.getNumItens ());
 
-        System.out.println("Numero de publicacoes: " + publications.getNumItens ());
-        System.out.println("Numero de orientacoes: " + mentorings.getNumItens ());
+        System.out.println("\tNumero de publicacoes: " + publications.getNumItens ());
+        System.out.println("\tNumero de orientacoes: " + mentorings.getNumItens ());
 
 
+
+    }
+
+    /*item 3 letra a*/
+    public void memberProduction(Colaborator e){
+
+        ProjectCollection projectsCol = new ProjectCollection ();
+        PublicationCollection publicationsCol = new PublicationCollection ();
+        MentoringCollection mentoringsCol = new MentoringCollection ();
+
+        ProjectIterator projectIt = (ProjectIterator) projects.createIterator ();
+        PublicationIterator publicationIt = (PublicationIterator) publications.createIterator ();
+        MentoringIterator mentoringIt = (MentoringIterator) mentorings.createIterator ();
+
+        while(projectIt.hasNext ()) {
+            Project p = (Project)projectIt.next ();
+            if(p.getMember ( e.getEmail () ) != null) {
+                projectsCol.addProject ( p );
+            }
+
+        }
+        while(publicationIt.hasNext ()) {
+            Publication p = (Publication)publicationIt.next ();
+            if(p.getColaborator ( e.getEmail () ) != null) {
+                publicationsCol.addPublications ( p );
+            }
+
+        }
+        while(mentoringIt.hasNext ()) {
+            Mentoring p = (Mentoring) mentoringIt.next ();
+            if(p.getTeacher ( ).getEmail ().equals ( e.getEmail () )) {
+                mentoringsCol.addMentoring ( p );
+            }
+        }
+
+        ArrayList<Publication> memberPubs = publicationsCol.sortByYear ();
+        ArrayList<Project> memberProjs = projectsCol.sortByYear ();
+
+        System.out.println("\n\tInformacoes sobre este colaborador:");
+        System.out.println("\n\tNome: "+ e.getName ());
+        System.out.println("\n\tEmail: "+ e.getEmail ());
+        System.out.println( (e instanceof Student) ?"\n\tEstudante de "+ ((Student) e).getType () : "" );
+
+        System.out.println("\n\tProjetos:");
+        for (Project p1: memberProjs) {
+            if(!p1.getStatus ().equals ( "Em andamento" )) {
+                System.out.println("\tProjeto: " + p1.getTitle () +", ano: "+p1.getStartdate ());
+            }
+        }
+        System.out.println("\t-Projetos em andamento:");
+        for (Project p1: memberProjs) {
+            if(p1.getStatus ().equals ( "Em andamento" )) {
+                System.out.println("\tProjeto: " + p1.getTitle () +", ano: "+p1.getStartdate ());
+            }
+        }
+
+        if(e instanceof Teacher ){
+            System.out.println("\n\tOrienta os seguintes alunos:");
+            mentoringIt = (MentoringIterator) mentoringsCol.createIterator ();
+
+            while(mentoringIt.hasNext ()){
+                Mentoring m1 = (Mentoring) mentoringIt.next();
+                Student s1 = m1.getStudent ();
+                System.out.println("\tAluno: "+s1.getName () +", Tipo: "+s1.getType ());
+            }
+        }
+
+        System.out.println("\n\tPublicacoes:");
+        for (Publication p1: memberPubs) {
+            System.out.println("\tPublicacao: " + p1.getTitle () +", ano: "+p1.getYear ());
+        }
 
     }
 }

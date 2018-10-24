@@ -1,8 +1,7 @@
 package productivitysystem.util.iterator.colections;
 
-import productivitysystem.colaborator.Colaborator;
+
 import productivitysystem.production.Publication;
-import productivitysystem.util.iterator.iterators.ColaboratorIterator;
 import productivitysystem.util.iterator.iterators.Iterator;
 import productivitysystem.util.iterator.iterators.PublicationIterator;
 
@@ -31,7 +30,7 @@ public class PublicationCollection implements Collection{
         return this.numItens;
     }
 
-    public ArrayList<Publication> sortByYear(){
+    public ArrayList<Publication> sortByYear() {
         ArrayList<Publication> target = new ArrayList <Publication> (  );
         PublicationIterator it = (PublicationIterator)this.createIterator ();
 
@@ -41,10 +40,10 @@ public class PublicationCollection implements Collection{
         }
 
         for(int i = 0; i < target.size (); i++){
-            for (int j = 0; j < target.size () - 1; j++){
+            for (int j = 0; j < target.size () - 2; j++){
                 Publication a = target.get ( j );
                 Publication b = target.get( j + 1);
-                if(a.getYear () < b.getYear ()){
+                if(a.getYear () > b.getYear ()){
                     target.add ( j+1, a );
                     target.add(j, b);
                 }

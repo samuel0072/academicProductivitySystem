@@ -48,6 +48,19 @@ public class Publication{
         this.authors.addColaborator ( e );
     }
 
+    public Colaborator getColaborator(String email) {
+        ColaboratorIterator e = (ColaboratorIterator)authors.createIterator ();
+        Colaborator target  = null;
+        while(e.hasNext ()) {
+            Colaborator a = (Colaborator)e.next ();
+            if(a.getEmail ().equals ( email )){
+                target = a;
+                break;
+            }
+        }
+        return target;
+    }
+
     public Project getProject(){
         return this.project;
     }

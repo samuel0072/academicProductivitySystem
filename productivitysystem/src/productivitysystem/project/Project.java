@@ -2,7 +2,6 @@ package productivitysystem.project;
 
 import productivitysystem.colaborator.Colaborator;
 import productivitysystem.colaborator.student.Student;
-import productivitysystem.colaborator.student.StudentWithProject;
 import productivitysystem.colaborator.teacher.Teacher;
 import productivitysystem.production.Publication;
 import productivitysystem.util.iterator.colections.ColaboratorCollection;
@@ -16,8 +15,8 @@ import java.util.ArrayList;
 public class Project {
 
     private String title;
-    private String startdate;
-    private String endDate;
+    private int startdate;
+    private int endDate;
     private String financierAgency;
     private double value;
     private String objective;
@@ -32,7 +31,7 @@ public class Project {
 
     private ArrayList<Student> observers = new ArrayList <Student> (  );
 
-    public Project(String title, String startdate, String endDate,
+    public Project(String title, int startdate, int endDate,
                    String financierAgency, double value, String objective,
                    String description, String status, Colaborator manager)  {
 
@@ -64,11 +63,11 @@ public class Project {
         return this.title;
     }
 
-    public String getStartdate(){
+    public int getStartdate(){
         return this.startdate;
     }
 
-    public String getEndDate(){
+    public int getEndDate(){
         return this.endDate;
     }
 
@@ -92,6 +91,25 @@ public class Project {
         return this.value;
     }
 
+    public Colaborator getManager(){
+        return this.manager;
+    }
+
+    public Colaborator getMember(String email) {
+        ColaboratorIterator e = (ColaboratorIterator) members.createIterator ();
+        Colaborator target = null;
+
+        while(e.hasNext ()) {
+            Colaborator a = (Colaborator)e.next ();
+            if(a.getEmail ().equals ( email )){
+                target = a;
+                break;
+            }
+        }
+        return target;
+    }
+
+
     public void showMembers(){
         ColaboratorIterator e = (ColaboratorIterator) members.createIterator ();
         System.out.println("\n\tColaboradores deste projeto:\n");
@@ -112,7 +130,7 @@ public class Project {
         boolean suceed = false;
         if(this.status.equals("Em elaboracao") && status.equals ( "Em andamento" )){
 
-            if(oneTeacher && title!= null && startdate != null && endDate!= null
+            if(oneTeacher && title!= null && startdate != 0 && endDate!= 0
                     && financierAgency != null && value > 0 && objective != null
                     && description != null && members.getNumItens () > 0
                     && manager != null) {
@@ -157,10 +175,6 @@ public class Project {
             e.addProject ( this );
         }
 
-    }
-
-    public Colaborator getManager(){
-        return this.manager;
     }
 
     /*Item 3-b*/

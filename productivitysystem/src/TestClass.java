@@ -6,6 +6,7 @@ import productivitysystem.laboratory.Laboratory;
 import productivitysystem.production.Mentoring;
 import productivitysystem.production.Publication;
 import productivitysystem.project.Project;
+import productivitysystem.util.iterator.colections.MentoringCollection;
 
 public class TestClass {
     public static void main(String[] args) {
@@ -39,13 +40,13 @@ public class TestClass {
         laboratory.addColaborator ( r2 );
         laboratory.addColaborator ( r3 );
 
-        p1 = new Project ( "Superdumpy1", "2018", "2019",
+        p1 = new Project ( "Superdumpy1", 2018, 2019,
                 "SamuelLimited", 10000, "Alguma coisa",
                 "Isso ae", "Em elaboracao", t1);
-        p2 = new Project("Superdumpy2", "2019", "2020",
+        p2 = new Project("Superdumpy2", 2019, 2020,
                 "SamuelLimited", 2000, "ALgo",
                 "isso ae", "Em elaboracao", t2);
-        p3 = new Project("Superdumpy3", "2020", "2021",
+        p3 = new Project("Superdumpy3", 2020, 2021,
                 "SamuelLimited", 20000, "kkk",
                 "isso ae", "Em elaboracao", r1);
         laboratory.addProject ( p1 );
@@ -83,12 +84,12 @@ public class TestClass {
         p3.addMember ( s3 );
         p3.addMember ( t1 );
         p3.addMember ( r2 );
-
         p1.setStatus ( "Em andamento" );
-        p2.setStatus ( "Em andamento");
-        p3.setStatus ( "Em andamento" );
 
-        laboratory.report ();
+        pu1.addAuthor ( s1 );
+        pu2.addAuthor ( t1 );
+        pu1.addAuthor ( t1 );
+        laboratory.memberProduction ( t1 );
 
     }
 }
