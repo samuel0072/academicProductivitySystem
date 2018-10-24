@@ -79,15 +79,15 @@ public class Main {
         System.out.println("\n\tQue tipo de colaborador deseja adicionar?");
         System.out.println("\t1 - Estudante");
         System.out.println("\t2 - Professor");
-        System.out.println("\t3 - Pesquisador");
+        System.out.print("\t3 - Pesquisador\n\t");
 
         d = readEntrance ( 0, 4 );
 
         System.out.println("\n\tInforme:");
-        System.out.println("\tNome:");
+        System.out.print("\tNome:\n\t");
         name = reader.nextLine ();
 
-        System.out.println("\tEmail?");
+        System.out.print("\tEmail?\n\t");
         email = reader.nextLine ();
 
         switch(d) {
@@ -95,7 +95,7 @@ public class Main {
                 System.out.println("\n\tQue tipo de aluno?");
                 System.out.println("\t1 - Graduacao");
                 System.out.println("\t2 - Mestrado");
-                System.out.println("\t3 - Doutorado");
+                System.out.print("\t3 - Doutorado\n\t");
                 d = readEntrance ( 0, 4 );
                 laboratory.addColaborator (  new Student(name, types[d-1] , email) );
                 break;
@@ -121,34 +121,34 @@ public class Main {
          Colaborator manager;
          String email;
 
-         System.out.println("informe:");
-         System.out.println("titulo do projeto:");
+         System.out.println("\n\tInforme:");
+         System.out.print("\n\tTitulo do projeto:\n\t");
          title = reader.nextLine ();
 
-         System.out.println("data de inicio do projeto:");
+         System.out.print("\n\tData de inicio do projeto:");
          startdate = readEntrance ( 1989, 2019 );
 
-         System.out.println("data de termino do projeto:");
+         System.out.print("\n\tData de termino do projeto:\n\t");
          endDate = readEntrance ( startdate-1, 2999 );
 
-         System.out.println("a agencia financiadora:");
+         System.out.print("\n\tA agencia financiadora:\n\t");
          financierAgency = reader.nextLine();
 
-         System.out.println("o valor do financiamento:");
+         System.out.print("\n\tO valor do financiamento:\n\t");
          value = readEntrance ( 0.0, 999999.9999 );
 
-         System.out.println("o objetivo(Em apenas uma linha)");
+         System.out.print("\n\tO objetivo(Em apenas uma linha)\n\t");
          objective = reader.nextLine ();
 
-         System.out.println("A descricao(Em apenas uma linha):");
+         System.out.print("\n\tA descricao(Em apenas uma linha):\n\t");
          description = reader.nextLine ();
 
-         System.out.println("Digite o email do gerente do projeto:");
+         System.out.print("\n\tDigite o email do gerente do projeto:\n\t");
          laboratory.showMembers ();
          manager = null;
 
          while(manager == null) {
-             System.out.println("Digite o email:");
+             System.out.print("\n\tDigite o email:\n\t");
              email = reader.nextLine ();
              manager = laboratory.getColaborator ( email );
          }
@@ -162,12 +162,12 @@ public class Main {
          int year;
          String title;
 
-         System.out.println("Informe:");
-         System.out.println("Titulo:");
+         System.out.println("\n\tInforme:");
+         System.out.print("Titulo:\n\t");
          title = reader.nextLine ();
-         System.out.println("Ano de publicacao:");
+         System.out.print("\n\tAno de publicacao:\n\t");
          year = readEntrance ( 0, 9999 );
-         System.out.println("Conferencia:");
+         System.out.print("\n\tConferencia:\n\t");
          conference = reader.nextLine ();
 
          laboratory.addPublication ( new Publication ( conference, year, title ) );
@@ -183,13 +183,13 @@ public class Main {
         laboratory.showMembers ();
 
         while(!(teacher instanceof Teacher)) {
-            System.out.println("\n\tDentre os colaboradores acima digite o email do professor");
+            System.out.print("\n\tDentre os colaboradores acima digite o email do professor\n\t");
             emailT = reader.nextLine ();
             teacher = laboratory.getColaborator ( emailT );
         }
 
         while(!(student instanceof Student)) {
-            System.out.println("\n\tDentre os colaboradores acima digite o email do estudante");
+            System.out.print("\n\tDentre os colaboradores acima digite o email do estudante\n\t");
             emailS = reader.nextLine ();
             student = laboratory.getColaborator ( emailS );
         }
@@ -206,7 +206,7 @@ public class Main {
         laboratory.showProjects ();
 
         while(target == null) {
-            System.out.println("\tInforme o titulo do projeto:");
+            System.out.print("\n\tInforme o titulo do projeto:\n\t");
             title = reader.nextLine ();
             target = laboratory.getProject ( title );
         }
@@ -222,13 +222,13 @@ public class Main {
         laboratory.showPublications ();
 
         while(target == null) {
-            System.out.println("\n\tInforme o titulo da publicacao:");
+            System.out.print("\n\tInforme o titulo da publicacao:\n\t");
             title = reader.nextLine ();
             target = laboratory.getPublication ( title );
         }
         System.out.println("\t\nO que deseja fazer?");
         System.out.println("\t1 -Adicionar autor");
-        System.out.println ( "\t2 -Associar a um projeto" );
+        System.out.print ( "\t2 -Associar a um projeto\n\t" );
         d = readEntrance ( 0, 3 );
 
         if(d == 1){
@@ -236,7 +236,7 @@ public class Main {
             Colaborator author = null;
             laboratory.showMembers ();
             while(author == null){
-                System.out.println("\n\tInforme o email do autor:");
+                System.out.print("\n\tInforme o email do autor:\n\t");
                 email = reader.nextLine ();
                 author = laboratory.getColaborator ( email );
             }
@@ -248,11 +248,11 @@ public class Main {
             Project p = null;
             laboratory.showProjects ();
             while(p == null){
-                System.out.println("\n\tinforme o titulo do projeto:");
+                System.out.print("\n\tinforme o titulo do projeto:\n\t");
                 titleP = reader.nextLine ();
                 p = laboratory.getProject ( titleP );
-                target.addProject ( p );
             }
+            target.addProject ( p );
         }
     }
 
@@ -263,14 +263,14 @@ public class Main {
 
         laboratory.showProjects ();
         while(target == null) {
-            System.out.println("\n\tInforme o titulo do projeto:");
+            System.out.print("\n\tInforme o titulo do projeto:\n\t");
             title = reader.nextLine ();
             target = laboratory.getProject ( title );
         }
         System.out.println("\n\tO que deseja fazer?");
         System.out.println("\t1 - Alocar um membro ao projeto");
         System.out.println("\t2 - Mudar estado do projeto");
-        System.out.println("\t3 - Adicionar uma publicacao");
+        System.out.print("\t3 - Adicionar uma publicacao\n\t");
         d = readEntrance ( 0, 4 );
 
         if(d == 1){
@@ -279,7 +279,7 @@ public class Main {
             Colaborator e = null;
             String email;
             while(e == null) {
-                System.out.println("\n\tDigite o email:");
+                System.out.print("\n\tDigite o email:\n\t");
                 email = reader.nextLine ();
                 e = laboratory.getColaborator ( email );
             }
@@ -288,7 +288,7 @@ public class Main {
         else if(d == 2){
             System.out.println("\n\tQual estado deseja adotar?");
             System.out.println("\n\t1 - Em andamento");
-            System.out.println("\n\t2 - Concluido");
+            System.out.print("\n\t2 - Concluido\n\t");
             d = readEntrance ( 0, 3 );
             String[] status = {"Em andamento", "Concluido"};
             System.out.println(target.setStatus ( status[d-1] )?
@@ -298,7 +298,7 @@ public class Main {
             laboratory.showPublications ();
             Publication pu = null;
             while(pu == null){
-                System.out.println("\tInforme o titulo da publicacao:");
+                System.out.print("\n\tInforme o titulo da publicacao:\n\t");
                 title = reader.nextLine ();
                 pu = laboratory.getPublication ( title );
             }
@@ -312,7 +312,7 @@ public class Main {
         Colaborator c = null;
         laboratory.showMembers ();
         while(c == null){
-            System.out.println("informe o email do membro:");
+            System.out.print("\n\tInforme o email do membro:\n\t");
             email = reader.nextLine ();
             c = laboratory.getColaborator ( email );
         }
