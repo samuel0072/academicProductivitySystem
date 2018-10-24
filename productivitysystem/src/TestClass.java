@@ -1,4 +1,3 @@
-import productivitysystem.colaborator.Colaborator;
 import productivitysystem.colaborator.researcher.Researcher;
 import productivitysystem.colaborator.student.Student;
 import productivitysystem.colaborator.teacher.Teacher;
@@ -6,7 +5,6 @@ import productivitysystem.laboratory.Laboratory;
 import productivitysystem.production.Mentoring;
 import productivitysystem.production.Publication;
 import productivitysystem.project.Project;
-import productivitysystem.util.iterator.colections.MentoringCollection;
 
 public class TestClass {
     public static void main(String[] args) {
@@ -89,7 +87,8 @@ public class TestClass {
         pu1.addAuthor ( s1 );
         pu2.addAuthor ( t1 );
         pu1.addAuthor ( t1 );
-        laboratory.memberProduction ( t1 );
+        laboratory.memberProduction ( s1 );
+        //System.out.println(laboratory.getPublication ( "Sup1" ).getTitle ());
 
     }
 }

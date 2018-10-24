@@ -5,8 +5,6 @@ import productivitysystem.util.iterator.colections.ColaboratorCollection;
 import productivitysystem.util.iterator.iterators.ColaboratorIterator;
 import productivitysystem.project.Project;
 
-import java.util.ArrayList;
-
 public class Publication{
 
     private ColaboratorCollection authors;
@@ -69,7 +67,7 @@ public class Publication{
         boolean suceed = false;
         if(this.project == null && e.getStatus().equals("Em andamento")){
             project = e;
-            e.addpublication ( this );
+            e.addPublication ( this );
             suceed =  true;
         }
         return suceed;

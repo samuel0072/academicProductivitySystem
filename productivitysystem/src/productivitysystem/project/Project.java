@@ -169,7 +169,7 @@ public class Project {
 
     }
 
-    public void addpublication(Publication e){
+    public void addPublication(Publication e){
         if(e.getProject () == null && this.status.equals ( "Em andamento" ) ){
             publicacoes.addPublications ( e );
             e.addProject ( this );

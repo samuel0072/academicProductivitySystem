@@ -107,7 +107,7 @@ public class Laboratory {
         Publication target = null;
         while(e.hasNext ()){
             Publication a = (Publication) e.next ();
-            if(a.getTitle () == title){
+            if(a.getTitle ().equals(title)){
                 target = a;
                 break;
             }
@@ -117,12 +117,32 @@ public class Laboratory {
     }
 
     public void showMembers(){
-        System.out.println("Membros do lab:");
+        System.out.println("\n\tMembros do lab:");
 
         ColaboratorIterator e = (ColaboratorIterator) colaborators.createIterator ();
         while(e.hasNext ()){
             Colaborator a = (Colaborator) e.next ();
-            System.out.println("Nome: "+ a.getName () +", email: "+ a.getEmail ());
+            System.out.println("\t\tNome: "+ a.getName () +", email: "+ a.getEmail ());
+        }
+    }
+
+    public void showPublications(){
+        PublicationIterator p = (PublicationIterator)publications.createIterator ();
+        System.out.println("\n\tPublicacoes do lab:");
+
+        while(p.hasNext ()) {
+            Publication e = (Publication)p.next ();
+
+            System.out.println("\t\tTitulo: " + e.getTitle () + ", Ano: " + e.getYear ());
+        }
+    }
+
+    public void showProjects(){
+        ProjectIterator p = (ProjectIterator)projects.createIterator ();
+        System.out.println("\n\tProjetos do lab:");
+        while(p.hasNext ()) {
+            Project e = (Project)p.next ();
+            System.out.println("\t\tProjeto: " + e.getTitle () + ", Inicio: " + e.getTitle ());
         }
     }
 
